@@ -6,38 +6,23 @@
 #     move: A function that returns 'c' or 'b'
 ####
 
-team_name = 'Rock and Leah' # Only 10 chars displayed.
-strategy_name = 'Loyal Betray, Betray, Collude'
-strategy_description = 'If the opponent copies the strategy, program colludes, otherwise it betrays'
+team_name = 'rockolei707' # Leah Peralta and Rock Yamashiro
+strategy_name = 'trying not to be sad last place people'
+strategy_description = 'Betray when you finally establish trust and collude when you lose it'
     
 def move(my_history, their_history, my_score, their_score):
-  #play b,b,c and if opponent copies collude, and betray otherwise
-   if len(my_history) <=2:
-       return 'b'
-   if len(my_history) ==3:
-       return 'c' 
-   if (their_score) ==-750 and (their_history) ==3:
-       return 'c'
-   else:
-       return 'b'
-   # For rounds onwards betray if severly punished and if not, collude
-       recent_round_them = their_history[-1]
-       recent_round_me = my_history[-1]
-                  
-       # Look at rounds before that one
-       for round in range(len(my_history)-1):
-           prior_round_them = their_history[round]
-           prior_round_me = my_history[round]
-           # If one matches
-           if (prior_round_me == recent_round_me) and \
-                   (prior_round_them == recent_round_them):
-               return their_history[round]
-       # No match found
-       if my_history[-1]=='c' and their_history[-1]=='b':
-           return 'b' # Betray if they were severely punished last time
-       else:
-           return 'c' # Otherwise collude.
-
+  #start off with collude
+  #if we both colluded, betray next round
+  #if I betrayed them but they colluded, collude next round
+  #otherwise betray
+    if len(my_history) == 0:
+        return 'c'
+    elif my_history[-1]== 'c' and their_history[-1]== 'c':
+        return 'b'
+    elif (len(my_history) > 1) and (my_history[-1]== 'b' and their_history[-1]== 'c'):
+        return 'c'
+    else:
+        return 'b'
     
 def test_move(my_history, their_history, my_score, their_score, result):
     '''calls move(my_history, their_history, my_score, their_score)
